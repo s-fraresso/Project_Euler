@@ -10,10 +10,10 @@ def is_bouncy(n):
 def find_bouncy_proportion(proportion):
     nb_bouncy = 0
     n = 1
-    while nb_bouncy * 100 < proportion * n:
+    while nb_bouncy * proportion[1] < proportion[0] * n:
         n += 1
         if is_bouncy(n):
             nb_bouncy += 1
     return n
 
-print(find_bouncy_proportion(99)) # 1587000
+print(find_bouncy_proportion((99, 100))) # 1587000
