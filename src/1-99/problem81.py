@@ -18,5 +18,5 @@ def min_path_sum(input_file):
             matrix.append([int(coef) for coef in line.split(',')])
     return node_value(matrix, 0, 0)
 
-print(min_path_sum("0081_matrix.txt"))
+print(min_path_sum("input_files\\0081_matrix.txt")) # 427337
 
