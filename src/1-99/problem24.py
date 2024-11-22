@@ -4,8 +4,9 @@ def find_nth_permutation(values, n):
     n -= 1
     to_add = sorted(list(values))
     perm = []
+    p = factorial(len(to_add))
     while to_add:
-        p = factorial(len(to_add) - 1)
+        p //= len(to_add)
         perm.append(to_add.pop(n // p))
         n %= p
     return ''.join(map(str, perm))
