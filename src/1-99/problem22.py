@@ -1,3 +1,5 @@
+import os
+
 def name_value(name):
     value = 0
     for c in name:
@@ -18,5 +20,4 @@ def names_scores(input_file):
     return total
 
 
-
-print(names_scores("0022_names.txt"))
+print(names_scores("input_files\\0022_names.txt")) # 871198282

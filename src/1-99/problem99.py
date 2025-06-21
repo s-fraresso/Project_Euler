@@ -14,4 +14,4 @@ def largest_exponential(input_file):
             l += 1
     return best_line
 
-print(largest_exponential("0099_base_exp.txt"))
+print(largest_exponential("input_files\\0099_base_exp.txt")) # 709
