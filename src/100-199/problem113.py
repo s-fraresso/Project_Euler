@@ -22,5 +22,5 @@ def count_ordered_numbers(is_increasing, nb_digits, limit_digit, memo):
     return res
 
 
-nb_digits = 10
+nb_digits = 100
 print(count_non_bouncy_numbers(nb_digits))
