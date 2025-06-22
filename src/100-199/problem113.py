@@ -1,10 +1,10 @@
 def count_non_bouncy_numbers(nb_digits):
     total = 0
     increasing_memo, decreasing_memo = dict(), dict()
-    for exact_nb_digit in range(1, nb_digits + 1):
+    for exact_nb_digits in range(1, nb_digits + 1):
         for starting_digit in range(1, 10):
-            total += count_ordered_numbers(True, exact_nb_digit - 1, starting_digit, increasing_memo)
-            total += count_ordered_numbers(False, exact_nb_digit - 1, starting_digit, decreasing_memo)
+            total += count_ordered_numbers(True, exact_nb_digits - 1, starting_digit, increasing_memo)
+            total += count_ordered_numbers(False, exact_nb_digits - 1, starting_digit, decreasing_memo)
     total -= nb_digits * 9 # to compensate double counting of 1-9, 111-999, etc.
     return total
 
@@ -22,5 +22,5 @@ def count_ordered_numbers(is_increasing, nb_digits, limit_digit, memo):
     return res
 
 
-nb_digits = 100
+nb_digits = 10
 print(count_non_bouncy_numbers(nb_digits))
