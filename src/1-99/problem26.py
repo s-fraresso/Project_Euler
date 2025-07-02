@@ -1,16 +1,15 @@
 def reciprocal_recurring_cycle_length(d):
-    qr_list = [(0, 1)]
-    quotient, reste = 0, 1
+    remainder_list = [1]
+    remainder = 1
 
-    while (quotient, reste) not in qr_list[:-1]:
-        quotient = reste // d
-        reste = (reste % d) * 10
-        qr_list.append((quotient, reste))
+    while remainder not in remainder_list[:-1]:
+        remainder = (remainder % d) * 10
+        remainder_list.append(remainder)
 
     cycle_length = 0
-    for i in range(len(qr_list) - 2, -1, -1):
+    for i in range(len(remainder_list) - 2, -1, -1):
         cycle_length += 1
-        if qr_list[i] == (quotient, reste):
+        if remainder_list[i] == remainder:
             break
 
     return cycle_length
