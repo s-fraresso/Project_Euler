@@ -1,6 +1,11 @@
 from sympy import factorint
 
 n = 1
-while any(len(factorint(n + i).keys()) < 4 for i in range(4)):
+consecutive_4_factor = 0
+while consecutive_4_factor < 4:
+    if len(factorint(n)) == 4:
+        consecutive_4_factor += 1
+    else:
+        consecutive_4_factor = 0
     n += 1
-print(n)
+print(n - 4)
