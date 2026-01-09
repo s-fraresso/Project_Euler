@@ -5,17 +5,19 @@ def sum_digit(n):
         n //= 10
     return s
 
-NB_DIGIT = 1000
 
-target_value = 13 * 10**(2 + NB_DIGIT * 2)
-a = 0
-b = 10**(NB_DIGIT + 3)
+def square_root_digit_sum(n, nb_decimals):
+    target_value = n * 10**(2 + nb_decimals * 2)
+    a = 0
+    b = 10**(nb_decimals + 3)
 
-while a + 1 < b:
-    m = (a + b) // 2
-    if m**2 > target_value:
-        b = m
-    else:
-        a = m
+    while a + 1 < b:
+        m = (a + b) // 2
+        if m**2 > target_value:
+            b = m
+        else:
+            a = m
+    
+    return sum_digit(a) - int(n**(1/2)) - a % 10
 
-print(sum_digit(a) - 3 - (a % 10))
+print(square_root_digit_sum(13, 1000))
