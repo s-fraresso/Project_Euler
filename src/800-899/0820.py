@@ -1,0 +1,1 @@
+print(sum(((10 * pow(10, 10**7 - 1, denom)) // denom) % 10 for denom in range(1, 10**7 + 1)))
