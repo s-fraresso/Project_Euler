@@ -1,44 +1,32 @@
-from collections import Counter
 from math import comb
 
 
-def ref_D(N):
+def comb2(n, k, memo=dict()):
+    if (n, k) not in memo:
+        memo[(n, k)] = comb(n, k)
+
+    return memo[(n, k)]
+
+
+def count_dom(nb_digit):
     nb_dom = 0
+    
+    # dom digit != 0
+    for nb_dom_digit in range(nb_digit // 2 + 1, nb_digit + 1):
+        nb_dom += 9**(nb_digit - nb_dom_digit) * comb2(nb_digit - 1, nb_dom_digit - 1) # a dom digit goes in first place
+        nb_dom += 8 * 9**max(0, (nb_digit - nb_dom_digit - 1)) * comb2(nb_digit - 1, nb_dom_digit) # a non dom digit goes in first place (so no 0 either)
+    
+    nb_dom *= 9 # for each possible dom digit != 0
 
-    for nb_digit in range(1, N + 1):
-        for n in range(10**(nb_digit - 1), 10**nb_digit):
-            if any(digit_count > nb_digit // 2 for digit_count in Counter(str(n)).values()):
-                nb_dom += 1
-
+    # dom digit = 0
+    for nb_zero in range(nb_digit // 2 + 1, nb_digit):
+        nb_dom += 9**(nb_digit - nb_zero) * comb2(nb_digit - 1, nb_zero)
+    
     return nb_dom
 
-print(ref_D(6) - ref_D(5))
 
-# N = 4
-nb_dom = 0
-# dom digit = 0
-nb_dom += 9 * 1
-# dom digit != 0
-nb_dom += 9 * (comb(4, 4) + comb(3, 2) * 9 + 8)
-print(nb_dom)
+def D(n):
+    return sum(count_dom(nb_digit) % 1_000_000_007 for nb_digit in range(1, n + 1)) % 1_000_000_007
 
-# N = 5
-nb_dom = 0
-# dom digit = 0
-nb_dom += 9**1 + 9**2 * comb(4, 3)
-# dom_digit != 0
-nb_dom += 9 * (comb(5, 5) +                             # 5
-               comb(4, 3) * 9 + 8 +                     # 4
-               comb(4, 2) * 9**2 + 8 * comb(4, 3) * 9)  # 3
-print(nb_dom)
 
-# N = 6
-nb_dom = 0
-# dom digit = 0
-nb_dom += (9**1 +                                       # 5
-           9**2 * comb(5, 4))                           # 4
-# dom_digit != 0
-nb_dom += 9 * (comb(6,6) +                              # 6
-               comb(5, 4) * 9 + 8 +                     # 5
-               comb(5, 3) * 9**2 + 8 * comb(5, 4) * 9)  # 4
-print(nb_dom)
+print(D(2022))
